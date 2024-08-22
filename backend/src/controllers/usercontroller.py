@@ -4,6 +4,7 @@ from src.util.dao import DAO
 import re
 emailValidator = re.compile(r'.*@.*')
 
+#random comment
 class UserController(Controller):
     def __init__(self, dao: DAO):
         super().__init__(dao=dao)
