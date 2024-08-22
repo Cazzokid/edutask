@@ -43,6 +43,7 @@ def sut(db_connection):
 
 
 # VALID USER, SUCCESSFUL CREATION
+@pytest.mark.integration
 def test_create_valid_data(sut):
     data = {"name": "Casso", "email": "Casso@gmail.com"}
     result = sut.create(data)
@@ -50,6 +51,7 @@ def test_create_valid_data(sut):
     #assert result['name'] == 'Casso'
 
 # VALID USER, DUPLICATE NAME
+@pytest.mark.integration
 def test_create_duplicate_name(sut):
     data = {"name": "Casso", "email": "Casso@gmail.com"}
     result = sut.create(data)
@@ -58,12 +60,14 @@ def test_create_duplicate_name(sut):
         sut.create(data)
 
 # INVALID (MISSING EMAIL), UNSUCCESSFUL CREATION
+@pytest.mark.integration
 def test_create_missing_email(sut):
     data = {"name": "Casso"}
     with pytest.raises(errors.WriteError):
         sut.create(data)
 
 # INVALID (WRONG BSON TYPE), UNSUCCESSFUL CREATION
+@pytest.mark.integration
 def test_create_wrong_type(sut):
     data = {"name": "Casso", "email": 123}
     with pytest.raises(errors.WriteError):
